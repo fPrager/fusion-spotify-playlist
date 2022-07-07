@@ -16,9 +16,8 @@ const nextArtist = (playlistId, artists, index) => {
         return;
     }
     const artist = artists[index];
-    const cleanName = artist.replaceAll('&','%26').replaceAll('/', '').replaceAll(' ', '%20').replaceAll(';', '').replaceAll('"', '');
-    console.log(`Artist ${cleanName} of index ${index}`);
-    getArtistId(cleanName).then(id => {
+    console.log(`Artist ${artist} of index ${index}`);
+    getArtistId(artist).then(id => {
         console.log('Artist id is: ' + id);
         if(!id) {
             nextArtist(playlistId, artists, index+1);
@@ -60,17 +59,13 @@ const go = (name, contentUrl) => {
 };
 
 let nextPlaylist = () => {
-    go('FUSION 2018 LIVE', './pageContent/live.html');
-    nextPlaylist = () => {
-        go('FUSION 2018 BAND', './pageContent/band.html');
-        nextPlaylist = () => {
-            go('FUSION 2018 DJ', './pageContent/dj.html');
-            nextPlaylist = undefined;
-        }
-    };
+    go('FUSION 2022 DJ', './pageContent/dj.html');
+    nextPlaylist = undefined;
 }
+
+console.log('run with', process.env.USER_ID, process.env.TOKEN)
 
 nextPlaylist();
 
 
-// USER_ID=sitterhonk TOKEN=BQDyijbVJRRjLKDoX3fFQ0SivHpm0B2TKVlSBmS9m-ICoPxADddQsCOw-VqB2o94zJRKWWHutq2ADl3T2NZJKHYSeal1ih7rLYsgnPO3aiNe2i5psiYXdAQsX1VVvRC4gqfgJogH38f6WiemhykBgJwRVOyoEYNp7hMiJhGdpBVAJdFkbSVr-2TF7rfal9sDrSiSgtI-lrZLrzlcg5h8V464qzBmsRgyK5PiXS7lYd-6HzP28vOq2WZIIcB0KKQDLpEO1Og3zgA4SqY2 node run.js
+// node USER_ID=sitterhonk TOKEN=BQAyRdFwlfJS4JrfW5JoPBgj1P5i_tLg6bZQbsUij0cPw4Cvx-OWq2qZKLyi35e-_LDGwDq45rREjeAG5cOjog74t9HPyP7QyfNIVTq3C2fWpu82zKCTcfYsbtf3_2xkAUFskME-0vxkXgr6apveTPKOcSbFUhGDFSiMBt3WS9aeo6RrxudIVWUmJ4_vAffDXoCF63pUJpE_zIBsQGL_x2heqwGGblPDLVIk1lIXdC-M9Hc9XKDHQF-ofHtW72WszEWqQcmA7rZWafmQxiAJhG6uGjMw43fsBNo8TxPzJ071bRzGrk-zRg run.js

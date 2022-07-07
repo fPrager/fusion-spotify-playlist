@@ -4,7 +4,7 @@ const getArtists = (url) => {
     return getContent(url)
         .then(content => {
             var artists = [];
-            var rec = /<h3 class="(.*)">(.*?)<\/h3>/gm;
+            var rec = /<h4 class="(.*)">(.*?)<\/h4>/gm;
             do {
                 m = rec.exec(content);
                 if (m) {

@@ -1,9 +1,10 @@
 const https = require('https');
 
 const getArtistId = (name) => {
+    console.log('encoded', encodeURI(name))
     let options = {
         hostname: 'api.spotify.com',
-        path: `/v1/search?q=${name}&type=artist`,
+        path: `/v1/search?q=${encodeURI(name)}&type=artist`,
         headers: {
             'Authorization': `Bearer ${process.env.TOKEN}`
          }  
@@ -18,17 +19,21 @@ const getArtistId = (name) => {
                 try{
                     let result = JSON.parse(body);
                     let items = ((result.artists || {}).items || []);
-                    if(items.length === 0)
-                        resolve(undefined);
-                    else
-                        resolve(items[0].id);
+                    const artistItem = items.find((item) => item.name.toLowerCase() === name.toLowerCase())
+                    if(!artistItem) {
+                        console.warn('no found for', name)
+                        resolve(undefined)
+                    } 
+                    else {
+                        resolve(artistItem.id)
+                    }
                 }
                 catch(err){
-                    reject('parse error');
+                    reject('parse error', err);
                 }                
             })
             res.on('error', function(e) {
-               reject(e.message);
+               reject('responded with', e.message);
             });
         });
     });
