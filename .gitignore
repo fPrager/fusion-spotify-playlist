@@ -1,0 +1,32 @@
+.deno
+
+# Deno cache
+.cache/
+
+# Deno test results
+deno.test.ts
+
+# Dependencies
+deps/
+deno_modules/
+
+# Build output
+dist/
+
+# IDE and editor-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+
+#replit env
+.replit
+replit.nix
