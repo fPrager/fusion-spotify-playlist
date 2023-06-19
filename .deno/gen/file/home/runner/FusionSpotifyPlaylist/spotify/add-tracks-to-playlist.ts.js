@@ -1,0 +1,13 @@
+import getClient from "./get-client.ts";
+const addTracksToPlaylist = async (playlistId, tracks)=>{
+    const client = await getClient();
+    const limit = 50;
+    let offset = 0;
+    while(offset < tracks.length){
+        const tracksToAdd = tracks.slice(offset, offset + limit);
+        await client.playlists.addItems(playlistId, tracksToAdd.map(({ uri  })=>uri));
+        offset += limit;
+    }
+};
+export default addTracksToPlaylist;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGU6Ly8vaG9tZS9ydW5uZXIvRnVzaW9uU3BvdGlmeVBsYXlsaXN0L3Nwb3RpZnkvYWRkLXRyYWNrcy10by1wbGF5bGlzdC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgZ2V0Q2xpZW50IGZyb20gXCIuL2dldC1jbGllbnQudHNcIjtcblxuY29uc3QgYWRkVHJhY2tzVG9QbGF5bGlzdCA9IGFzeW5jIChcbiAgcGxheWxpc3RJZDogc3RyaW5nLFxuICB0cmFja3M6IHsgdXJpOiBzdHJpbmcgfVtdLFxuKSA9PiB7XG4gIGNvbnN0IGNsaWVudCA9IGF3YWl0IGdldENsaWVudCgpO1xuICBjb25zdCBsaW1pdCA9IDUwO1xuICBsZXQgb2Zmc2V0ID0gMDtcbiAgd2hpbGUgKG9mZnNldCA8IHRyYWNrcy5sZW5ndGgpIHtcbiAgICBjb25zdCB0cmFja3NUb0FkZCA9IHRyYWNrcy5zbGljZShvZmZzZXQsIG9mZnNldCArIGxpbWl0KTtcbiAgICBhd2FpdCBjbGllbnQucGxheWxpc3RzLmFkZEl0ZW1zKFxuICAgICAgcGxheWxpc3RJZCxcbiAgICAgIHRyYWNrc1RvQWRkLm1hcCgoeyB1cmkgfSkgPT4gdXJpKSxcbiAgICApO1xuICAgIG9mZnNldCArPSBsaW1pdDtcbiAgfVxufTtcblxuZXhwb3J0IGRlZmF1bHQgYWRkVHJhY2tzVG9QbGF5bGlzdDtcbiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLGVBQWUsa0JBQWtCO0FBRXhDLE1BQU0sc0JBQXNCLE9BQzFCLFlBQ0EsU0FDRztJQUNILE1BQU0sU0FBUyxNQUFNO0lBQ3JCLE1BQU0sUUFBUTtJQUNkLElBQUksU0FBUztJQUNiLE1BQU8sU0FBUyxPQUFPLE1BQU0sQ0FBRTtRQUM3QixNQUFNLGNBQWMsT0FBTyxLQUFLLENBQUMsUUFBUSxTQUFTO1FBQ2xELE1BQU0sT0FBTyxTQUFTLENBQUMsUUFBUSxDQUM3QixZQUNBLFlBQVksR0FBRyxDQUFDLENBQUMsRUFBRSxJQUFHLEVBQUUsR0FBSztRQUUvQixVQUFVO0lBQ1o7QUFDRjtBQUVBLGVBQWUsb0JBQW9CIn0=

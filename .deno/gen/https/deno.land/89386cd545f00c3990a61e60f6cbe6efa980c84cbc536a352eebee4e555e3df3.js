@@ -1,0 +1,11 @@
+// Copyright 2018-2022 the Deno authors. All rights reserved. MIT license.
+import { decode, encode, toASCII, toUnicode, ucs2 } from "./internal/idna.ts";
+export { decode, encode, toASCII, toUnicode, ucs2 };
+export default {
+    decode,
+    encode,
+    toASCII,
+    toUnicode,
+    ucs2
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImh0dHBzOi8vZGVuby5sYW5kL3N0ZEAwLjE2Ny4wL25vZGUvcHVueWNvZGUudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTgtMjAyMiB0aGUgRGVubyBhdXRob3JzLiBBbGwgcmlnaHRzIHJlc2VydmVkLiBNSVQgbGljZW5zZS5cblxuaW1wb3J0IHsgZGVjb2RlLCBlbmNvZGUsIHRvQVNDSUksIHRvVW5pY29kZSwgdWNzMiB9IGZyb20gXCIuL2ludGVybmFsL2lkbmEudHNcIjtcblxuZXhwb3J0IHsgZGVjb2RlLCBlbmNvZGUsIHRvQVNDSUksIHRvVW5pY29kZSwgdWNzMiB9O1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gIGRlY29kZSxcbiAgZW5jb2RlLFxuICB0b0FTQ0lJLFxuICB0b1VuaWNvZGUsXG4gIHVjczIsXG59O1xuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLDBFQUEwRTtBQUUxRSxTQUFTLE1BQU0sRUFBRSxNQUFNLEVBQUUsT0FBTyxFQUFFLFNBQVMsRUFBRSxJQUFJLFFBQVEscUJBQXFCO0FBRTlFLFNBQVMsTUFBTSxFQUFFLE1BQU0sRUFBRSxPQUFPLEVBQUUsU0FBUyxFQUFFLElBQUksR0FBRztBQUVwRCxlQUFlO0lBQ2I7SUFDQTtJQUNBO0lBQ0E7SUFDQTtBQUNGLEVBQUUifQ==

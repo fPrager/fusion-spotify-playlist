@@ -1,0 +1,13 @@
+import getClient from "./get-client.ts";
+const getArtistId = async (name)=>{
+    const client = await getClient();
+    const matches = await client.artists.search(encodeURI(name));
+    const artist = matches.find(({ name: otherName  })=>otherName.toLocaleLowerCase() === name.toLocaleLowerCase());
+    if (!artist) {
+        console.warn(`...no spotify profile found for '${name}'. Only found ${matches.map(({ name: otherName  })=>`${otherName}, `)}`);
+        return null;
+    }
+    return artist.id;
+};
+export default getArtistId;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGU6Ly8vaG9tZS9ydW5uZXIvRnVzaW9uU3BvdGlmeVBsYXlsaXN0L3Nwb3RpZnkvZ2V0LWFydGl0c3QtaWQudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IGdldENsaWVudCBmcm9tIFwiLi9nZXQtY2xpZW50LnRzXCI7XG5cbmNvbnN0IGdldEFydGlzdElkID0gYXN5bmMgKG5hbWU6IHN0cmluZyk6IFByb21pc2U8c3RyaW5nIHwgbnVsbD4gPT4ge1xuICBjb25zdCBjbGllbnQgPSBhd2FpdCBnZXRDbGllbnQoKTtcbiAgY29uc3QgbWF0Y2hlcyA9IGF3YWl0IGNsaWVudC5hcnRpc3RzLnNlYXJjaChlbmNvZGVVUkkobmFtZSkpO1xuICBjb25zdCBhcnRpc3QgPSBtYXRjaGVzLmZpbmQoKHsgbmFtZTogb3RoZXJOYW1lIH0pID0+XG4gICAgb3RoZXJOYW1lLnRvTG9jYWxlTG93ZXJDYXNlKCkgPT09IG5hbWUudG9Mb2NhbGVMb3dlckNhc2UoKVxuICApO1xuICBpZiAoIWFydGlzdCkge1xuICAgIGNvbnNvbGUud2FybihcbiAgICAgIGAuLi5ubyBzcG90aWZ5IHByb2ZpbGUgZm91bmQgZm9yICcke25hbWV9Jy4gT25seSBmb3VuZCAke1xuICAgICAgICBtYXRjaGVzLm1hcCgoeyBuYW1lOiBvdGhlck5hbWUgfSkgPT4gYCR7b3RoZXJOYW1lfSwgYClcbiAgICAgIH1gLFxuICAgICk7XG4gICAgcmV0dXJuIG51bGw7XG4gIH1cbiAgcmV0dXJuIGFydGlzdC5pZDtcbn07XG5cbmV4cG9ydCBkZWZhdWx0IGdldEFydGlzdElkO1xuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxrQkFBa0I7QUFFeEMsTUFBTSxjQUFjLE9BQU8sT0FBeUM7SUFDbEUsTUFBTSxTQUFTLE1BQU07SUFDckIsTUFBTSxVQUFVLE1BQU0sT0FBTyxPQUFPLENBQUMsTUFBTSxDQUFDLFVBQVU7SUFDdEQsTUFBTSxTQUFTLFFBQVEsSUFBSSxDQUFDLENBQUMsRUFBRSxNQUFNLFVBQVMsRUFBRSxHQUM5QyxVQUFVLGlCQUFpQixPQUFPLEtBQUssaUJBQWlCO0lBRTFELElBQUksQ0FBQyxRQUFRO1FBQ1gsUUFBUSxJQUFJLENBQ1YsQ0FBQyxpQ0FBaUMsRUFBRSxLQUFLLGNBQWMsRUFDckQsUUFBUSxHQUFHLENBQUMsQ0FBQyxFQUFFLE1BQU0sVUFBUyxFQUFFLEdBQUssQ0FBQyxFQUFFLFVBQVUsRUFBRSxDQUFDLEVBQ3RELENBQUM7UUFFSixPQUFPLElBQUk7SUFDYixDQUFDO0lBQ0QsT0FBTyxPQUFPLEVBQUU7QUFDbEI7QUFFQSxlQUFlLFlBQVkifQ==

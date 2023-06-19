@@ -1,0 +1,7 @@
+// Copyright 2018-2022 the Deno authors. All rights reserved. MIT license.
+import Context from "../wasi/snapshot_preview1.ts";
+export const WASI = Context;
+export default {
+    WASI
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImh0dHBzOi8vZGVuby5sYW5kL3N0ZEAwLjE2Ny4wL25vZGUvd2FzaS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgMjAxOC0yMDIyIHRoZSBEZW5vIGF1dGhvcnMuIEFsbCByaWdodHMgcmVzZXJ2ZWQuIE1JVCBsaWNlbnNlLlxuaW1wb3J0IENvbnRleHQgZnJvbSBcIi4uL3dhc2kvc25hcHNob3RfcHJldmlldzEudHNcIjtcblxuZXhwb3J0IGNvbnN0IFdBU0kgPSBDb250ZXh0O1xuXG5leHBvcnQgZGVmYXVsdCB7IFdBU0kgfTtcbiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSwwRUFBMEU7QUFDMUUsT0FBTyxhQUFhLCtCQUErQjtBQUVuRCxPQUFPLE1BQU0sT0FBTyxRQUFRO0FBRTVCLGVBQWU7SUFBRTtBQUFLLEVBQUUifQ==

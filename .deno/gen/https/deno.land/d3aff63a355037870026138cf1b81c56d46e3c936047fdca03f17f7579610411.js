@@ -1,0 +1,45 @@
+// Copyright 2018-2022 the Deno authors. All rights reserved. MIT license.
+import { isFd, maybeCallback } from "./_fs_common.ts";
+import { copyObject, getOptions } from "../internal/fs/utils.mjs";
+import { writeFile, writeFileSync } from "./_fs_writeFile.ts";
+import { promisify } from "../internal/util.mjs";
+/**
+ * TODO: Also accept 'data' parameter as a Node polyfill Buffer type once these
+ * are implemented. See https://github.com/denoland/deno/issues/3403
+ */ export function appendFile(path, data, options, callback) {
+    callback = maybeCallback(callback || options);
+    options = getOptions(options, {
+        encoding: "utf8",
+        mode: 0o666,
+        flag: "a"
+    });
+    // Don't make changes directly on options object
+    options = copyObject(options);
+    // Force append behavior when using a supplied file descriptor
+    if (!options.flag || isFd(path)) {
+        options.flag = "a";
+    }
+    writeFile(path, data, options, callback);
+}
+/**
+ * TODO: Also accept 'data' parameter as a Node polyfill Buffer type once these
+ * are implemented. See https://github.com/denoland/deno/issues/3403
+ */ export const appendFilePromise = promisify(appendFile);
+/**
+ * TODO: Also accept 'data' parameter as a Node polyfill Buffer type once these
+ * are implemented. See https://github.com/denoland/deno/issues/3403
+ */ export function appendFileSync(path, data, options) {
+    options = getOptions(options, {
+        encoding: "utf8",
+        mode: 0o666,
+        flag: "a"
+    });
+    // Don't make changes directly on options object
+    options = copyObject(options);
+    // Force append behavior when using a supplied file descriptor
+    if (!options.flag || isFd(path)) {
+        options.flag = "a";
+    }
+    writeFileSync(path, data, options);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImh0dHBzOi8vZGVuby5sYW5kL3N0ZEAwLjE2Ny4wL25vZGUvX2ZzL19mc19hcHBlbmRGaWxlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCAyMDE4LTIwMjIgdGhlIERlbm8gYXV0aG9ycy4gQWxsIHJpZ2h0cyByZXNlcnZlZC4gTUlUIGxpY2Vuc2UuXG5pbXBvcnQge1xuICBDYWxsYmFja1dpdGhFcnJvcixcbiAgaXNGZCxcbiAgbWF5YmVDYWxsYmFjayxcbiAgV3JpdGVGaWxlT3B0aW9ucyxcbn0gZnJvbSBcIi4vX2ZzX2NvbW1vbi50c1wiO1xuaW1wb3J0IHsgRW5jb2RpbmdzIH0gZnJvbSBcIi4uL191dGlscy50c1wiO1xuaW1wb3J0IHsgY29weU9iamVjdCwgZ2V0T3B0aW9ucyB9IGZyb20gXCIuLi9pbnRlcm5hbC9mcy91dGlscy5tanNcIjtcbmltcG9ydCB7IHdyaXRlRmlsZSwgd3JpdGVGaWxlU3luYyB9IGZyb20gXCIuL19mc193cml0ZUZpbGUudHNcIjtcbmltcG9ydCB7IHByb21pc2lmeSB9IGZyb20gXCIuLi9pbnRlcm5hbC91dGlsLm1qc1wiO1xuXG4vKipcbiAqIFRPRE86IEFsc28gYWNjZXB0ICdkYXRhJyBwYXJhbWV0ZXIgYXMgYSBOb2RlIHBvbHlmaWxsIEJ1ZmZlciB0eXBlIG9uY2UgdGhlc2VcbiAqIGFyZSBpbXBsZW1lbnRlZC4gU2VlIGh0dHBzOi8vZ2l0aHViLmNvbS9kZW5vbGFuZC9kZW5vL2lzc3Vlcy8zNDAzXG4gKi9cbmV4cG9ydCBmdW5jdGlvbiBhcHBlbmRGaWxlKFxuICBwYXRoOiBzdHJpbmcgfCBudW1iZXIgfCBVUkwsXG4gIGRhdGE6IHN0cmluZyB8IFVpbnQ4QXJyYXksXG4gIG9wdGlvbnM6IEVuY29kaW5ncyB8IFdyaXRlRmlsZU9wdGlvbnMgfCBDYWxsYmFja1dpdGhFcnJvcixcbiAgY2FsbGJhY2s/OiBDYWxsYmFja1dpdGhFcnJvcixcbikge1xuICBjYWxsYmFjayA9IG1heWJlQ2FsbGJhY2soY2FsbGJhY2sgfHwgb3B0aW9ucyk7XG4gIG9wdGlvbnMgPSBnZXRPcHRpb25zKG9wdGlvbnMsIHsgZW5jb2Rpbmc6IFwidXRmOFwiLCBtb2RlOiAwbzY2NiwgZmxhZzogXCJhXCIgfSk7XG5cbiAgLy8gRG9uJ3QgbWFrZSBjaGFuZ2VzIGRpcmVjdGx5IG9uIG9wdGlvbnMgb2JqZWN0XG4gIG9wdGlvbnMgPSBjb3B5T2JqZWN0KG9wdGlvbnMpO1xuXG4gIC8vIEZvcmNlIGFwcGVuZCBiZWhhdmlvciB3aGVuIHVzaW5nIGEgc3VwcGxpZWQgZmlsZSBkZXNjcmlwdG9yXG4gIGlmICghb3B0aW9ucy5mbGFnIHx8IGlzRmQocGF0aCkpIHtcbiAgICBvcHRpb25zLmZsYWcgPSBcImFcIjtcbiAgfVxuXG4gIHdyaXRlRmlsZShwYXRoLCBkYXRhLCBvcHRpb25zLCBjYWxsYmFjayk7XG59XG5cbi8qKlxuICogVE9ETzogQWxzbyBhY2NlcHQgJ2RhdGEnIHBhcmFtZXRlciBhcyBhIE5vZGUgcG9seWZpbGwgQnVmZmVyIHR5cGUgb25jZSB0aGVzZVxuICogYXJlIGltcGxlbWVudGVkLiBTZWUgaHR0cHM6Ly9naXRodWIuY29tL2Rlbm9sYW5kL2Rlbm8vaXNzdWVzLzM0MDNcbiAqL1xuZXhwb3J0IGNvbnN0IGFwcGVuZEZpbGVQcm9taXNlID0gcHJvbWlzaWZ5KGFwcGVuZEZpbGUpIGFzIChcbiAgcGF0aDogc3RyaW5nIHwgbnVtYmVyIHwgVVJMLFxuICBkYXRhOiBzdHJpbmcgfCBVaW50OEFycmF5LFxuICBvcHRpb25zPzogRW5jb2RpbmdzIHwgV3JpdGVGaWxlT3B0aW9ucyxcbikgPT4gUHJvbWlzZTx2b2lkPjtcblxuLyoqXG4gKiBUT0RPOiBBbHNvIGFjY2VwdCAnZGF0YScgcGFyYW1ldGVyIGFzIGEgTm9kZSBwb2x5ZmlsbCBCdWZmZXIgdHlwZSBvbmNlIHRoZXNlXG4gKiBhcmUgaW1wbGVtZW50ZWQuIFNlZSBodHRwczovL2dpdGh1Yi5jb20vZGVub2xhbmQvZGVuby9pc3N1ZXMvMzQwM1xuICovXG5leHBvcnQgZnVuY3Rpb24gYXBwZW5kRmlsZVN5bmMoXG4gIHBhdGg6IHN0cmluZyB8IG51bWJlciB8IFVSTCxcbiAgZGF0YTogc3RyaW5nIHwgVWludDhBcnJheSxcbiAgb3B0aW9ucz86IEVuY29kaW5ncyB8IFdyaXRlRmlsZU9wdGlvbnMsXG4pIHtcbiAgb3B0aW9ucyA9IGdldE9wdGlvbnMob3B0aW9ucywgeyBlbmNvZGluZzogXCJ1dGY4XCIsIG1vZGU6IDBvNjY2LCBmbGFnOiBcImFcIiB9KTtcblxuICAvLyBEb24ndCBtYWtlIGNoYW5nZXMgZGlyZWN0bHkgb24gb3B0aW9ucyBvYmplY3RcbiAgb3B0aW9ucyA9IGNvcHlPYmplY3Qob3B0aW9ucyk7XG5cbiAgLy8gRm9yY2UgYXBwZW5kIGJlaGF2aW9yIHdoZW4gdXNpbmcgYSBzdXBwbGllZCBmaWxlIGRlc2NyaXB0b3JcbiAgaWYgKCFvcHRpb25zLmZsYWcgfHwgaXNGZChwYXRoKSkge1xuICAgIG9wdGlvbnMuZmxhZyA9IFwiYVwiO1xuICB9XG5cbiAgd3JpdGVGaWxlU3luYyhwYXRoLCBkYXRhLCBvcHRpb25zKTtcbn1cbiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSwwRUFBMEU7QUFDMUUsU0FFRSxJQUFJLEVBQ0osYUFBYSxRQUVSLGtCQUFrQjtBQUV6QixTQUFTLFVBQVUsRUFBRSxVQUFVLFFBQVEsMkJBQTJCO0FBQ2xFLFNBQVMsU0FBUyxFQUFFLGFBQWEsUUFBUSxxQkFBcUI7QUFDOUQsU0FBUyxTQUFTLFFBQVEsdUJBQXVCO0FBRWpEOzs7Q0FHQyxHQUNELE9BQU8sU0FBUyxXQUNkLElBQTJCLEVBQzNCLElBQXlCLEVBQ3pCLE9BQXlELEVBQ3pELFFBQTRCLEVBQzVCO0lBQ0EsV0FBVyxjQUFjLFlBQVk7SUFDckMsVUFBVSxXQUFXLFNBQVM7UUFBRSxVQUFVO1FBQVEsTUFBTTtRQUFPLE1BQU07SUFBSTtJQUV6RSxnREFBZ0Q7SUFDaEQsVUFBVSxXQUFXO0lBRXJCLDhEQUE4RDtJQUM5RCxJQUFJLENBQUMsUUFBUSxJQUFJLElBQUksS0FBSyxPQUFPO1FBQy9CLFFBQVEsSUFBSSxHQUFHO0lBQ2pCLENBQUM7SUFFRCxVQUFVLE1BQU0sTUFBTSxTQUFTO0FBQ2pDLENBQUM7QUFFRDs7O0NBR0MsR0FDRCxPQUFPLE1BQU0sb0JBQW9CLFVBQVUsWUFJeEI7QUFFbkI7OztDQUdDLEdBQ0QsT0FBTyxTQUFTLGVBQ2QsSUFBMkIsRUFDM0IsSUFBeUIsRUFDekIsT0FBc0MsRUFDdEM7SUFDQSxVQUFVLFdBQVcsU0FBUztRQUFFLFVBQVU7UUFBUSxNQUFNO1FBQU8sTUFBTTtJQUFJO0lBRXpFLGdEQUFnRDtJQUNoRCxVQUFVLFdBQVc7SUFFckIsOERBQThEO0lBQzlELElBQUksQ0FBQyxRQUFRLElBQUksSUFBSSxLQUFLLE9BQU87UUFDL0IsUUFBUSxJQUFJLEdBQUc7SUFDakIsQ0FBQztJQUVELGNBQWMsTUFBTSxNQUFNO0FBQzVCLENBQUMifQ==

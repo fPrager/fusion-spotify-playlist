@@ -1,0 +1,14 @@
+// Copyright 2018-2022 the Deno authors. All rights reserved. MIT license.
+// Copyright Joyent and Node contributors. All rights reserved. MIT license.
+// deno-lint-ignore-file no-explicit-any
+export function createSecureContext(options) {
+    return {
+        ca: options?.ca,
+        cert: options?.cert,
+        key: options?.key
+    };
+}
+export default {
+    createSecureContext
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImh0dHBzOi8vZGVuby5sYW5kL3N0ZEAwLjE2Ny4wL25vZGUvX3Rsc19jb21tb24udHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29weXJpZ2h0IDIwMTgtMjAyMiB0aGUgRGVubyBhdXRob3JzLiBBbGwgcmlnaHRzIHJlc2VydmVkLiBNSVQgbGljZW5zZS5cbi8vIENvcHlyaWdodCBKb3llbnQgYW5kIE5vZGUgY29udHJpYnV0b3JzLiBBbGwgcmlnaHRzIHJlc2VydmVkLiBNSVQgbGljZW5zZS5cbi8vIGRlbm8tbGludC1pZ25vcmUtZmlsZSBuby1leHBsaWNpdC1hbnlcblxuZXhwb3J0IGZ1bmN0aW9uIGNyZWF0ZVNlY3VyZUNvbnRleHQob3B0aW9uczogYW55KSB7XG4gIHJldHVybiB7XG4gICAgY2E6IG9wdGlvbnM/LmNhLFxuICAgIGNlcnQ6IG9wdGlvbnM/LmNlcnQsXG4gICAga2V5OiBvcHRpb25zPy5rZXksXG4gIH07XG59XG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgY3JlYXRlU2VjdXJlQ29udGV4dCxcbn07XG4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsMEVBQTBFO0FBQzFFLDRFQUE0RTtBQUM1RSx3Q0FBd0M7QUFFeEMsT0FBTyxTQUFTLG9CQUFvQixPQUFZLEVBQUU7SUFDaEQsT0FBTztRQUNMLElBQUksU0FBUztRQUNiLE1BQU0sU0FBUztRQUNmLEtBQUssU0FBUztJQUNoQjtBQUNGLENBQUM7QUFFRCxlQUFlO0lBQ2I7QUFDRixFQUFFIn0=

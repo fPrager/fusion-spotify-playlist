@@ -1,0 +1,9 @@
+const getUserId = ()=>{
+    const id = Deno.env.get("USER_ID");
+    if (!id) {
+        throw new Error('missing USER_ID in env');
+    }
+    return id;
+};
+export default getUserId;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGU6Ly8vaG9tZS9ydW5uZXIvRnVzaW9uU3BvdGlmeVBsYXlsaXN0L3Nwb3RpZnkvZ2V0LXVzZXItaWQudHMiXSwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgZ2V0VXNlcklkID0gKCk6c3RyaW5nICA9PiB7XG4gIGNvbnN0IGlkID0gRGVuby5lbnYuZ2V0KFwiVVNFUl9JRFwiKVxuICBpZighaWQpIHtcbiAgICB0aHJvdyBuZXcgRXJyb3IoJ21pc3NpbmcgVVNFUl9JRCBpbiBlbnYnKVxuICB9XG4gIHJldHVybiBpZFxufSBcblxuZXhwb3J0IGRlZmF1bHQgZ2V0VXNlcklkIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sWUFBWSxJQUFjO0lBQzlCLE1BQU0sS0FBSyxLQUFLLEdBQUcsQ0FBQyxHQUFHLENBQUM7SUFDeEIsSUFBRyxDQUFDLElBQUk7UUFDTixNQUFNLElBQUksTUFBTSwwQkFBeUI7SUFDM0MsQ0FBQztJQUNELE9BQU87QUFDVDtBQUVBLGVBQWUsVUFBUyJ9
