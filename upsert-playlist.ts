@@ -10,15 +10,17 @@ import removeTracksFromPlaylist from "./spotify/remove-tracks-from-playlist.ts";
 import updatePlaylistInfo from "./spotify/update-playlist-info.ts";
 
 const upsertPlaylist = async (name: PlaylistName) => {
-  const playlistId = await getPlaylistId(name);
+  const playlistId = await getPlaylistId(name); 
   const existingTracks = await getTracksInPlaylist(playlistId);
   console.log(`... got ${existingTracks.length} existing tracks`)
   const artistsToAdd = await getArtists(PLAYLIST_MAP[name].url);
   console.log(`... artists on page ${artistsToAdd}`)
+  let missingArtists: string[] = []
   const tracksForPlaylist = await artistsToAdd.reduce(
     async (tracks, artistName) => {
       const spotifyId = await getArtistId(artistName);
       if (!spotifyId) {
+        missingArtists.push(artistName)
         return tracks;
       }
       return [...(await tracks), ...(await getArtistsTopTracks(spotifyId))];
@@ -38,14 +40,15 @@ const upsertPlaylist = async (name: PlaylistName) => {
   console.log(
     `...remove ${tracksToRemove.length} tracks of artists, that are not present anymore`,
   );
-  // @ts-expect-error
+  
+  
   await removeTracksFromPlaylist(playlistId, tracksToRemove);
   console.log(
     `...add ${tracksToAdd.length} tracks of artists, that are not in list yet`,
   );
   await addTracksToPlaylist(playlistId, tracksToAdd);
   console.log(`...update playlist info`);
-  await updatePlaylistInfo(playlistId);
+  await updatePlaylistInfo(playlistId, missingArtists);
 
   console.log(`done for ${name}✔️`);
 };

@@ -30,7 +30,6 @@ const getPlaylistId = async (name: PlaylistName) => {
     if(!newPlaylist) {
       throw new Error('error while creating the playlist')
     }
-    console.log(newPlaylist);
     await Deno.writeTextFile(
       PLAYLIST_FILE,
       JSON.stringify([...existingPlaylists, {

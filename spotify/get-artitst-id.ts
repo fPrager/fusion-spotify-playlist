@@ -2,7 +2,7 @@ import getClient from "./get-client.ts";
 
 const getArtistId = async (name: string): Promise<string | null> => {
   const client = await getClient();
-  const matches = await client.artists.search(encodeURI(name));
+  const matches = await client.artists.search(name);
   const artist = matches.find(({ name: otherName }) =>
     otherName.toLocaleLowerCase() === name.toLocaleLowerCase()
   );

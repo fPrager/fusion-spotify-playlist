@@ -30,3 +30,6 @@ Thumbs.db
 #replit env
 .replit
 replit.nix
+
+#secrets
+.env

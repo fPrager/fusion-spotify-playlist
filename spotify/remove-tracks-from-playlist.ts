@@ -1,4 +1,4 @@
-import getClient from "./get-client.ts";
+import getTokenFromEnv from "../get-token-from-env.ts";
 
 const API = "https://api.spotify.com/v1/playlists/PLAYLIST_ID/tracks";
 
@@ -8,6 +8,7 @@ const removeTracksFromPlaylist = async (
 ) => {
   const limit = 50;
   let offset = 0;
+  const token = await getTokenFromEnv()
   while (offset < tracks.length) {
     const tracksToRemove = tracks.slice(offset, offset + limit);
     await fetch(API.replace("PLAYLIST_ID", playlistId), {
@@ -16,7 +17,7 @@ const removeTracksFromPlaylist = async (
         tracks: tracksToRemove.map(({ uri }) => uri),
       }),
       headers: {
-        Authentication: `Bearer ${Deno.env.get("TOKEN")}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
